@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FST Web Dev</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #ffd700;
+      }
+
+      .mobile-menu {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.8),
+          rgba(118, 75, 162, 0.8)
+        );
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.2s both;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(45deg, #ff6b6b, #feca57);
+        color: white;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeInUp 1s ease 0.4s both;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Team Section */
+      .team {
+        padding: 80px 0;
+        background: white;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .team-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .team-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+      }
+
+      .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .member-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        padding: 3px;
+      }
+
+      .member-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        background: white;
+      }
+
+      .member-name {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .member-role {
+        color: #667eea;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .member-description {
+        color: #666;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .social-link.instagram {
+        background: linear-gradient(
+          45deg,
+          #f09433,
+          #e6683c,
+          #dc2743,
+          #cc2366,
+          #bc1888
+        );
+      }
+
+      .social-link.linkedin {
+        background: #0077b5;
+      }
+
+      .social-link.github {
+        background: #333;
+      }
+
+      .social-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+      }
+
+      .contact h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .contact p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-button {
+        display: inline-block;
+        background: white;
+        color: #667eea;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .contact-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Footer */
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+
+        .hero-content h1 {
+          font-size: 3rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          flex-direction: column;
+          padding: 1rem;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .nav-links a {
+          color: #333;
+          padding: 0.5rem 0;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-content p {
+          font-size: 1rem;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .team-card {
+          padding: 1.5rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .contact h2 {
+          font-size: 2rem;
+        }
+
+        .member-avatar {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 15px;
+        }
+
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+
+        .team-card {
+          padding: 1rem;
+        }
+
+        .member-avatar {
+          width: 90px;
+          height: 90px;
+        }
+
+        .social-links {
+          gap: 0.5rem;
+        }
+
+        .social-link {
+          width: 35px;
+          height: 35px;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .contact h2 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <a href="#" class="logo">FSTDevTeam</a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Beranda</a></li>
+          <li><a href="#team">Tim</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <button class="mobile-menu" id="mobileMenu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Tim Pengembang Website Fakultas Sains dan Tekonologi</h1>
+        <p>
+          Kami adalah tim yang berdedikasi untuk menciptakan solusi digital yang
+          inovatif dan berkualitas tinggi
+        </p>
+        <a href="#team" class="cta-button">Kenali Tim Kami</a>
+      </div>
+    </section>
+
+    <section class="team" id="team">
+      <div class="container">
+        <h2 class="section-title">Tim Kami</h2>
+        <div class="team-grid">
+          <!-- Zaki -->
+          <div class="team-card">
+            <div class="member-avatar">
+              <img src="asset/muammar-zaki.jpg" alt="Muammar Zaki" />
+            </div>
+            <h3 class="member-name">Muammar Zaki</h3>
+            <p class="member-role">Head Project & Backend Developer</p>
+            <p class="member-description">
+              Memimpin proyek dengan visi yang jelas dan mengembangkan sistem
+              backend yang robust. Berpengalaman dalam arsitektur sistem dan
+              manajemen tim pengembangan.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/marsal_mc?igsh=aG9vZTJtYWIwM2g5"
+                class="social-link instagram"
+                title="Instagram"
+                target="_blank"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/muammar-zaki-b6387a2a0/"
+                class="social-link linkedin"
+                title="LinkedIn"
+                target="_blank"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="https://github.com/Muammarzaki"
+                class="social-link github"
+                title="GitHub"
+                target="_blank"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Feril -->
+          <div class="team-card">
+            <div class="member-avatar">
+              <img src="asset/feril-ferdian.jpg" alt="Feril Ferdian" />
+            </div>
+            <h3 class="member-name">Feril Ferdian</h3>
+            <p class="member-role">Frontend Developer</p>
+            <p class="member-description">
+              Spesialis dalam menciptakan antarmuka pengguna yang menarik dan
+              responsif. Ahli dalam teknologi frontend modern dan pengalaman
+              pengguna yang optimal.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/feril.ferdiaan?igsh=MWN4cHcxMGV1bHc3dQ=="
+                class="social-link instagram"
+                title="Instagram"
+                target="_blank"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/feril-ferdian-b88404236/"
+                class="social-link linkedin"
+                title="LinkedIn"
+                target="_blank"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="https://github.com/feril23"
+                class="social-link github"
+                title="GitHub"
+                target="_blank"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+          <!--Ikbar-->
+          <div class="team-card">
+            <div class="member-avatar">
+              <img
+                src="asset/muhammad-ikbar-siddiq.png"
+                alt="Muhammad Ikbar Siddiq"
+              />
+            </div>
+            <h3 class="member-name">Muhammad Ikbar Siddiq</h3>
+            <p class="member-role">Frontend Developer 2</p>
+            <p class="member-description">
+              Fokus pada detail dan kualitas dalam pengembangan frontend.
+              Berpengalaman dalam implementasi desain yang pixel-perfect dan
+              interaksi yang smooth.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/m_ikbar_?igsh=MW14bmtrbzBnbHFvcg%3D%3D&utm_source=qr"
+                class="social-link instagram"
+                title="Instagram"
+                target="_blank"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ikbar-siddiq-399932367/"
+                class="social-link linkedin"
+                title="LinkedIn"
+                target="_blank"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="https://github.com/tekt23"
+                class="social-link github"
+                title="GitHub"
+                target="_blank"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2>Mari Berkolaborasi</h2>
+        <p>
+          Siap untuk memulai proyek digital Anda? Mari diskusikan bagaimana kami
+          dapat membantu mewujudkan ide Anda.
+        </p>
+        <a href="mailto:team@devteam.com" class="contact-button"
+          >Hubungi Kami</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 FSTWebDev. Semua hak dilindungi undang-undang.</p>
+      </div>
+    </footer>
+
+    <script>
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.getElementById("navLinks");
+
+      mobileMenu.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        const icon = mobileMenu.querySelector("i");
+        if (navLinks.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          const icon = mobileMenu.querySelector("i");
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            const headerHeight = document.querySelector("header").offsetHeight;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector("header");
+        if (window.scrollY > 100) {
+          header.style.background = "rgba(255, 255, 255, 0.95)";
+          header.style.backdropFilter = "blur(10px)";
+          header.querySelectorAll(".nav-links a, .logo").forEach((el) => {
+            el.style.color = "#333";
+          });
+          mobileMenu.style.color = "#333";
+        } else {
+          header.style.background = "rgba(255, 255, 255, 0.1)";
+          header.style.backdropFilter = "blur(10px)";
+          header.querySelectorAll(".nav-links a, .logo").forEach((el) => {
+            el.style.color = "white";
+          });
+          mobileMenu.style.color = "white";
+        }
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = "fadeInUp 0.6s ease forwards";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".team-card").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        observer.observe(card);
+      });
+
+      document.querySelectorAll(".social-link").forEach((link) => {
+        link.addEventListener("click", function () {
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "translateY(-3px)";
+          }, 150);
+        });
+      });
+
+      document.querySelectorAll(".team-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+    </script>
+  </body>
+</html>

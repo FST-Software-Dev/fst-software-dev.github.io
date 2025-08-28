@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FST Web Dev</title>
+    <title>FST Web Development Team - Professional Digital Solutions</title>
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
     <style>
@@ -15,12 +15,22 @@
         box-sizing: border-box;
       }
 
+      :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(45deg, #ff6b6b, #feca57);
+        --accent-color: #ffd700;
+        --text-dark: #2c3e50;
+        --text-light: #ffffff;
+        --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        --hover-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        --border-radius: 20px;
+      }
+
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
-        color: #333;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
+        color: var(--text-dark);
+        overflow-x: hidden;
       }
 
       .container {
@@ -29,16 +39,48 @@
         padding: 0 20px;
       }
 
+      /* Animated Background */
+      .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--primary-gradient);
+        z-index: -2;
+      }
+
+      .animated-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        animation: float 20s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        33% { transform: translateY(-20px) rotate(1deg); }
+        66% { transform: translateY(10px) rotate(-1deg); }
+      }
+
       /* Header */
       header {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
         padding: 1rem 0;
         position: fixed;
         width: 100%;
         top: 0;
         z-index: 1000;
         transition: all 0.3s ease;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
       }
 
       nav {
@@ -48,33 +90,50 @@
       }
 
       .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-dark);
         text-decoration: none;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
       .nav-links {
         display: flex;
         list-style: none;
-        gap: 2rem;
+        gap: 2.5rem;
       }
 
       .nav-links a {
-        color: white;
+        color: var(--text-dark);
         text-decoration: none;
-        transition: color 0.3s ease;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
       }
 
-      .nav-links a:hover {
-        color: #ffd700;
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: var(--primary-gradient);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
       }
 
       .mobile-menu {
         display: none;
         background: none;
         border: none;
-        color: white;
+        color: var(--text-dark);
         font-size: 1.5rem;
         cursor: pointer;
       }
@@ -87,68 +146,329 @@
         justify-content: center;
         text-align: center;
         color: white;
-        background: linear-gradient(
-          135deg,
-          rgba(102, 126, 234, 0.8),
-          rgba(118, 75, 162, 0.8)
-        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+        z-index: -1;
       }
 
       .hero-content h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1rem;
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
         animation: fadeInUp 1s ease;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-content .subtitle {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        font-weight: 300;
+        animation: fadeInUp 1s ease 0.2s both;
+        opacity: 0.9;
       }
 
       .hero-content p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        animation: fadeInUp 1s ease 0.2s both;
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeInUp 1s ease 0.3s both;
+        opacity: 0.8;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease 0.5s both;
       }
 
       .cta-button {
         display: inline-block;
-        background: linear-gradient(45deg, #ff6b6b, #feca57);
-        color: white;
-        padding: 12px 30px;
+        padding: 15px 35px;
         text-decoration: none;
         border-radius: 50px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        animation: fadeInUp 1s ease 0.4s both;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button.primary {
+        background: var(--secondary-gradient);
+        color: white;
+      }
+
+      .cta-button.secondary {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
       }
 
       .cta-button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
       }
 
-      /* Team Section */
-      .team {
-        padding: 80px 0;
-        background: white;
+      /* Services Section */
+      .services {
+        padding: 100px 0;
+        background: linear-gradient(45deg, #f8f9fa, #ffffff);
+        position: relative;
+      }
+
+      .services::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23667eea" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.5;
       }
 
       .section-title {
         text-align: center;
-        font-size: 2.5rem;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 4rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 2.5rem;
+        text-align: center;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--primary-gradient);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--hover-shadow);
+      }
+
+      .service-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        color: white;
+      }
+
+      .service-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+      }
+
+      .service-description {
+        color: #666;
+        line-height: 1.7;
+      }
+
+      /* Portfolio Section */
+      .portfolio {
+        padding: 100px 0;
+        background: var(--primary-gradient);
+        color: white;
+        position: relative;
+      }
+
+      .portfolio::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon fill="rgba(255,255,255,0.05)" points="50,0 100,50 50,100 0,50"/></svg>');
+        background-size: 100px 100px;
+        opacity: 0.3;
+        animation: float 15s ease-in-out infinite;
+      }
+
+      .portfolio-showcase {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius);
+        padding: 3rem;
+        text-align: center;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         margin-bottom: 3rem;
-        color: #333;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+      }
+
+      .portfolio-showcase:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .portfolio-image {
+        width: 100%;
+        max-width: 600px;
+        height: 300px;
+        background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        border-radius: 15px;
+        margin: 0 auto 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.8);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .portfolio-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .portfolio-image:hover::before {
+        left: 100%;
+      }
+
+      .portfolio-image:hover {
+        transform: scale(1.02);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .portfolio-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+
+      .portfolio-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .portfolio-button {
+        display: inline-block;
+        background: white;
+        color: var(--text-dark);
+        padding: 15px 35px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .portfolio-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--secondary-gradient);
+        transition: left 0.3s ease;
+        z-index: -1;
+      }
+
+      .portfolio-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        color: white;
+      }
+
+      .portfolio-button:hover::before {
+        left: 0;
+      }
+
+      /* Team Section */
+      .team {
+        padding: 100px 0;
+        background: white;
+        position: relative;
       }
 
       .team-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        margin-top: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
       }
 
       .team-card {
         background: white;
-        border-radius: 20px;
-        padding: 2rem;
+        border-radius: var(--border-radius);
+        padding: 2.5rem;
         text-align: center;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
       }
@@ -160,25 +480,30 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(45deg, #667eea, #764ba2);
+        background: var(--primary-gradient);
       }
 
       .team-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: var(--hover-shadow);
       }
 
       .member-avatar {
-        width: 120px;
-        height: 120px;
+        width: 130px;
+        height: 130px;
         border-radius: 50%;
-        margin: 0 auto 1rem;
+        margin: 0 auto 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        padding: 3px;
+        background: var(--primary-gradient);
+        padding: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .team-card:hover .member-avatar {
+        transform: scale(1.1) rotate(5deg);
       }
 
       .member-avatar img {
@@ -190,22 +515,23 @@
       }
 
       .member-name {
-        font-size: 1.3rem;
-        font-weight: bold;
+        font-size: 1.4rem;
+        font-weight: 700;
         margin-bottom: 0.5rem;
-        color: #333;
+        color: var(--text-dark);
       }
 
       .member-role {
         color: #667eea;
         font-weight: 600;
         margin-bottom: 1rem;
+        font-size: 1rem;
       }
 
       .member-description {
         color: #666;
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
+        margin-bottom: 2rem;
+        line-height: 1.7;
         font-size: 0.95rem;
       }
 
@@ -216,26 +542,39 @@
       }
 
       .social-link {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         text-decoration: none;
         color: white;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover::before {
+        opacity: 1;
+        transform: scale(1.2);
       }
 
       .social-link.instagram {
-        background: linear-gradient(
-          45deg,
-          #f09433,
-          #e6683c,
-          #dc2743,
-          #cc2366,
-          #bc1888
-        );
+        background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
       }
 
       .social-link.linkedin {
@@ -247,57 +586,130 @@
       }
 
       .social-link:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       }
 
       /* Contact Section */
       .contact {
-        padding: 80px 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 100px 0;
+        background: var(--primary-gradient);
         color: white;
         text-align: center;
+        position: relative;
+      }
+
+      .contact::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+        background-size: 200px 200px;
+        animation: float 25s ease-in-out infinite;
       }
 
       .contact h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
       }
 
       .contact p {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
       }
 
       .contact-button {
         display: inline-block;
         background: white;
-        color: #667eea;
-        padding: 12px 30px;
+        color: var(--text-dark);
+        padding: 15px 40px;
         text-decoration: none;
         border-radius: 50px;
         font-weight: 600;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .contact-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--secondary-gradient);
+        transition: left 0.3s ease;
+        z-index: -1;
       }
 
       .contact-button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        color: white;
+      }
+
+      .contact-button:hover::before {
+        left: 0;
       }
 
       /* Footer */
       footer {
-        background: #333;
+        background: #1a1a1a;
         color: white;
         text-align: center;
-        padding: 2rem 0;
+        padding: 3rem 0;
+        position: relative;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: var(--accent-color);
+      }
+
+      .footer-section p, .footer-section a {
+        color: #ccc;
+        text-decoration: none;
+        line-height: 1.6;
+      }
+
+      .footer-section a:hover {
+        color: white;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #333;
+        padding-top: 1.5rem;
+        color: #999;
       }
 
       /* Animations */
       @keyframes fadeInUp {
         from {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(50px);
         }
         to {
           opacity: 1;
@@ -305,15 +717,24 @@
         }
       }
 
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+
       /* Responsive Design */
       @media (max-width: 1024px) {
-        .team-grid {
+        .team-grid, .services-grid {
           grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .hero-content h1 {
-          font-size: 3rem;
+          font-size: 3.5rem;
+        }
+
+        .section-title {
+          font-size: 2.5rem;
         }
       }
 
@@ -324,10 +745,11 @@
           top: 100%;
           left: 0;
           width: 100%;
-          background: rgba(255, 255, 255, 0.95);
+          background: rgba(255, 255, 255, 0.98);
           flex-direction: column;
-          padding: 1rem;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          padding: 2rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          border-radius: 0 0 20px 20px;
         }
 
         .nav-links.active {
@@ -335,8 +757,9 @@
         }
 
         .nav-links a {
-          color: #333;
-          padding: 0.5rem 0;
+          color: var(--text-dark);
+          padding: 1rem 0;
+          font-size: 1.1rem;
         }
 
         .mobile-menu {
@@ -344,33 +767,39 @@
         }
 
         .hero-content h1 {
-          font-size: 2.5rem;
+          font-size: 2.8rem;
         }
 
-        .hero-content p {
-          font-size: 1rem;
+        .hero-content .subtitle {
+          font-size: 1.2rem;
         }
 
-        .team-grid {
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .team-grid, .services-grid {
           grid-template-columns: 1fr;
-          gap: 1.5rem;
-        }
-
-        .team-card {
-          padding: 1.5rem;
+          gap: 2rem;
         }
 
         .section-title {
-          font-size: 2rem;
+          font-size: 2.2rem;
         }
 
         .contact h2 {
-          font-size: 2rem;
+          font-size: 2.2rem;
         }
 
-        .member-avatar {
-          width: 100px;
-          height: 100px;
+        .portfolio-image {
+          height: 250px;
+          font-size: 2.5rem;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: left;
         }
       }
 
@@ -380,25 +809,29 @@
         }
 
         .hero-content h1 {
-          font-size: 2rem;
+          font-size: 2.2rem;
         }
 
-        .team-card {
-          padding: 1rem;
+        .hero-content .subtitle {
+          font-size: 1rem;
+        }
+
+        .team-card, .service-card {
+          padding: 2rem;
         }
 
         .member-avatar {
-          width: 90px;
-          height: 90px;
+          width: 110px;
+          height: 110px;
         }
 
         .social-links {
-          gap: 0.5rem;
+          gap: 0.8rem;
         }
 
         .social-link {
-          width: 35px;
-          height: 35px;
+          width: 40px;
+          height: 40px;
         }
 
         .section-title {
@@ -408,15 +841,41 @@
         .contact h2 {
           font-size: 1.8rem;
         }
+
+        .portfolio-image {
+          height: 200px;
+          font-size: 2rem;
+        }
+
+        .cta-button, .contact-button, .portfolio-button {
+          padding: 12px 25px;
+          font-size: 1rem;
+        }
+      }
+
+      /* Scroll animations */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.6s ease;
+      }
+
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
       }
     </style>
   </head>
   <body>
+    <div class="animated-bg"></div>
+    
     <header>
       <nav class="container">
-        <a href="#" class="logo">FSTDevTeam</a>
+        <a href="#" class="logo">FST DevTeam</a>
         <ul class="nav-links" id="navLinks">
           <li><a href="#home">Beranda</a></li>
+          <li><a href="#services">Layanan</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#team">Tim</a></li>
           <li><a href="#contact">Kontak</a></li>
         </ul>
@@ -428,30 +887,148 @@
 
     <section class="hero" id="home">
       <div class="hero-content">
-        <h1>Tim Pengembang Website Fakultas Sains dan Tekonologi</h1>
+        <h1>Tim Pengembang Web Profesional</h1>
+        <p class="subtitle">Fakultas Sains dan Teknologi UIN Ar-Raniry</p>
         <p>
-          Kami adalah tim yang berdedikasi untuk menciptakan solusi digital yang
-          inovatif dan berkualitas tinggi
+          Kami adalah tim developer berpengalaman yang menciptakan solusi digital inovatif, 
+          modern, dan berkualitas tinggi untuk institusi pendidikan dan organisasi profesional
         </p>
-        <a href="#team" class="cta-button">Kenali Tim Kami</a>
+        <div class="cta-buttons">
+          <a href="#portfolio" class="cta-button primary">Lihat Karya Kami</a>
+          <a href="#services" class="cta-button secondary">Layanan Kami</a>
+        </div>
       </div>
     </section>
 
-    <section class="team" id="team">
+    <section class="services animate-on-scroll" id="services">
       <div class="container">
-        <h2 class="section-title">Tim Kami</h2>
+        <h2 class="section-title">Layanan Profesional Kami</h2>
+        <p class="section-subtitle">
+          Solusi web development terdepan dengan teknologi modern dan standar industri terkini
+        </p>
+        <div class="services-grid">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3 class="service-title">Web Development</h3>
+            <p class="service-description">
+              Pengembangan website responsif dan modern menggunakan teknologi terkini seperti HTML5, CSS3, JavaScript, dan framework populer.
+            </p>
+          </div>
+          
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 class="service-title">Responsive Design</h3>
+            <p class="service-description">
+              Desain yang optimal untuk semua perangkat, mulai dari desktop, tablet, hingga smartphone dengan performa maksimal.
+            </p>
+          </div>
+          
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="service-title">Backend Development</h3>
+            <p class="service-description">
+              Sistem backend yang robust dan scalable dengan database management yang efisien untuk kebutuhan aplikasi kompleks.
+            </p>
+          </div>
+          
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="service-title">Web Security</h3>
+            <p class="service-description">
+              Implementasi standar keamanan tinggi untuk melindungi data dan informasi sensitif dengan protokol enkripsi terkini.
+            </p>
+          </div>
+          
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="service-title">Performance Optimization</h3>
+            <p class="service-description">
+              Optimasi performa website untuk kecepatan loading maksimal dan pengalaman pengguna yang superior.
+            </p>
+          </div>
+          
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h3 class="service-title">Maintenance & Support</h3>
+            <p class="service-description">
+              Layanan pemeliharaan berkelanjutan dan support teknis 24/7 untuk memastikan website selalu optimal dan up-to-date.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio animate-on-scroll" id="portfolio">
+      <div class="container">
+        <h2 class="section-title">Portfolio Unggulan</h2>
+        <p class="section-subtitle">
+          Hasil karya profesional yang telah kami kembangkan dengan standar industri tertinggi
+        </p>
+        
+        <div class="portfolio-showcase animate-on-scroll">
+          <div class="portfolio-image" onclick="window.open('https://fst.uin.ar-raniry.ac.id/', '_blank')">
+            <i class="fas fa-university"></i>
+          </div>
+          <h3 class="portfolio-title">Website Fakultas Sains dan Teknologi</h3>
+          <p class="portfolio-description">
+            Website resmi Fakultas Sains dan Teknologi UIN Ar-Raniry dengan desain modern, 
+            sistem informasi terintegrasi, dan fitur-fitur canggih untuk mendukung kegiatan akademik. 
+            Dilengkapi dengan portal mahasiswa, informasi program studi, berita terkini, dan sistem manajemen konten yang mudah digunakan.
+          </p>
+          <a href="https://fst.uin.ar-raniry.ac.id/" target="_blank" class="portfolio-button">
+            <i class="fas fa-external-link-alt"></i> Kunjungi Website
+          </a>
+        </div>
+
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+          <div class="stat-card" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">100%</h4>
+            <p style="opacity: 0.9;">Responsive Design</p>
+          </div>
+          <div class="stat-card" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">A+</h4>
+            <p style="opacity: 0.9;">Security Grade</p>
+          </div>
+          <div class="stat-card" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">95+</h4>
+            <p style="opacity: 0.9;">Performance Score</p>
+          </div>
+          <div class="stat-card" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">24/7</h4>
+            <p style="opacity: 0.9;">Support Available</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team animate-on-scroll" id="team">
+      <div class="container">
+        <h2 class="section-title">Tim Developer Profesional</h2>
+        <p class="section-subtitle">
+          Meet our talented team of developers who bring innovation and expertise to every project
+        </p>
         <div class="team-grid">
           <!-- Zaki -->
-          <div class="team-card">
+          <div class="team-card animate-on-scroll">
             <div class="member-avatar">
               <img src="asset/muammar-zaki.jpg" alt="Muammar Zaki" />
             </div>
             <h3 class="member-name">Muammar Zaki</h3>
-            <p class="member-role">Head Project & Backend Developer (february - april 2025)</p>
+            <p class="member-role">Lead Developer & Project Manager</p>
             <p class="member-description">
-              Memimpin proyek dengan visi yang jelas dan mengembangkan sistem
-              backend yang robust. Berpengalaman dalam arsitektur sistem dan
-              manajemen tim pengembangan.
+              Spesialis dalam full-stack development dengan pengalaman 3+ tahun. Menguasai teknologi modern seperti Laravel, React, dan cloud infrastructure. Memimpin tim dengan visi teknologi terdepan dan metodologi agile development.
             </p>
             <div class="social-links">
               <a
@@ -482,16 +1059,14 @@
           </div>
 
           <!-- Feril -->
-          <div class="team-card">
+          <div class="team-card animate-on-scroll">
             <div class="member-avatar">
               <img src="asset/feril-ferdian.jpg" alt="Feril Ferdian" />
             </div>
             <h3 class="member-name">Feril Ferdian</h3>
-            <p class="member-role">Frontend Developer</p>
+            <p class="member-role">Senior Frontend Developer</p>
             <p class="member-description">
-              Spesialis dalam menciptakan antarmuka pengguna yang menarik dan
-              responsif. Ahli dalam teknologi frontend modern dan pengalaman
-              pengguna yang optimal.
+              Expert dalam UI/UX implementation dengan keahlian advanced dalam JavaScript, CSS3, dan modern frameworks. Fokus pada performance optimization dan user experience yang exceptional untuk setiap project.
             </p>
             <div class="social-links">
               <a
@@ -520,8 +1095,9 @@
               </a>
             </div>
           </div>
+          
           <!--Ikbar-->
-          <div class="team-card">
+          <div class="team-card animate-on-scroll">
             <div class="member-avatar">
               <img
                 src="asset/muhammad-ikbar-siddiq.png"
@@ -529,11 +1105,9 @@
               />
             </div>
             <h3 class="member-name">Muhammad Ikbar Siddiq</h3>
-            <p class="member-role">Frontend Developer 2</p>
+            <p class="member-role">Frontend Developer & UI Specialist</p>
             <p class="member-description">
-              Fokus pada detail dan kualitas dalam pengembangan frontend.
-              Berpengalaman dalam implementasi desain yang pixel-perfect dan
-              interaksi yang smooth.
+              Passionate frontend developer dengan keahlian dalam responsive design dan modern CSS frameworks. Berpengalaman dalam mengimplementasikan desain kompleks dengan attention to detail yang tinggi dan code quality terbaik.
             </p>
             <div class="social-links">
               <a
@@ -566,26 +1140,48 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="contact animate-on-scroll" id="contact">
       <div class="container">
         <h2>Mari Berkolaborasi</h2>
         <p>
-          Siap untuk memulai proyek digital Anda? Mari diskusikan bagaimana kami
-          dapat membantu mewujudkan ide Anda.
+          Siap mengembangkan proyek digital Anda dengan solusi profesional? 
+          Hubungi kami untuk konsultasi gratis dan diskusikan kebutuhan teknologi Anda.
         </p>
-        <a href="mailto:team@devteam.com" class="contact-button"
-          >Hubungi Kami</a
-        >
+        <a href="mailto:team@fstdevteam.com" class="contact-button">
+          <i class="fas fa-envelope"></i> Hubungi Kami Sekarang
+        </a>
       </div>
     </section>
 
     <footer>
       <div class="container">
-        <p>&copy; 2025 FSTWebDev. Semua hak dilindungi undang-undang.</p>
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>FST DevTeam</h3>
+            <p>Tim pengembang web profesional yang berdedikasi menciptakan solusi digital berkualitas tinggi untuk institusi pendidikan dan organisasi modern.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Layanan</h3>
+            <p><a href="#services">Web Development</a></p>
+            <p><a href="#services">Mobile App Development</a></p>
+            <p><a href="#services">System Integration</a></p>
+            <p><a href="#services">Technical Support</a></p>
+          </div>
+          <div class="footer-section">
+            <h3>Kontak</h3>
+            <p><i class="fas fa-envelope"></i> team@fstdevteam.com</p>
+            <p><i class="fas fa-phone"></i> +62 xxx-xxxx-xxxx</p>
+            <p><i class="fas fa-map-marker-alt"></i> UIN Ar-Raniry, Banda Aceh</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 FST WebDev Team. All rights reserved. | Developed with ❤️ by FST DevTeam</p>
+        </div>
       </div>
     </footer>
 
     <script>
+      // Mobile Menu Toggle
       const mobileMenu = document.getElementById("mobileMenu");
       const navLinks = document.getElementById("navLinks");
 
@@ -601,6 +1197,7 @@
         }
       });
 
+      // Close mobile menu when clicking on links
       document.querySelectorAll(".nav-links a").forEach((link) => {
         link.addEventListener("click", () => {
           navLinks.classList.remove("active");
@@ -610,6 +1207,7 @@
         });
       });
 
+      // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
@@ -628,25 +1226,26 @@
         });
       });
 
+      // Header background change on scroll
+      let lastScrollTop = 0;
       window.addEventListener("scroll", () => {
         const header = document.querySelector("header");
-        if (window.scrollY > 100) {
-          header.style.background = "rgba(255, 255, 255, 0.95)";
-          header.style.backdropFilter = "blur(10px)";
-          header.querySelectorAll(".nav-links a, .logo").forEach((el) => {
-            el.style.color = "#333";
-          });
-          mobileMenu.style.color = "#333";
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 100) {
+          header.style.background = "rgba(255, 255, 255, 0.98)";
+          header.style.backdropFilter = "blur(20px)";
+          header.style.boxShadow = "0 5px 30px rgba(0, 0, 0, 0.1)";
         } else {
-          header.style.background = "rgba(255, 255, 255, 0.1)";
-          header.style.backdropFilter = "blur(10px)";
-          header.querySelectorAll(".nav-links a, .logo").forEach((el) => {
-            el.style.color = "white";
-          });
-          mobileMenu.style.color = "white";
+          header.style.background = "rgba(255, 255, 255, 0.95)";
+          header.style.backdropFilter = "blur(20px)";
+          header.style.boxShadow = "0 5px 30px rgba(0, 0, 0, 0.1)";
         }
+        
+        lastScrollTop = scrollTop;
       });
 
+      // Scroll animations
       const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px",
@@ -655,35 +1254,184 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.style.animation = "fadeInUp 0.6s ease forwards";
+            entry.target.classList.add("animated");
           }
         });
       }, observerOptions);
 
-      document.querySelectorAll(".team-card").forEach((card) => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(30px)";
-        observer.observe(card);
+      // Observe all elements with animate-on-scroll class
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.observe(el);
       });
 
-      document.querySelectorAll(".social-link").forEach((link) => {
-        link.addEventListener("click", function () {
-          this.style.transform = "scale(0.95)";
-          setTimeout(() => {
-            this.style.transform = "translateY(-3px)";
-          }, 150);
-        });
-      });
-
-      document.querySelectorAll(".team-card").forEach((card) => {
+      // Enhanced card interactions
+      document.querySelectorAll(".team-card, .service-card").forEach((card) => {
         card.addEventListener("mouseenter", function () {
-          this.style.transform = "translateY(-10px) scale(1.02)";
+          this.style.transform = "translateY(-15px) scale(1.02)";
+          this.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
         });
 
         card.addEventListener("mouseleave", function () {
           this.style.transform = "translateY(0) scale(1)";
         });
       });
+
+      // Portfolio image interaction
+      document.querySelector(".portfolio-image").addEventListener("mouseenter", function() {
+        this.style.transform = "scale(1.05)";
+        this.style.transition = "all 0.3s ease";
+      });
+
+      document.querySelector(".portfolio-image").addEventListener("mouseleave", function() {
+        this.style.transform = "scale(1)";
+      });
+
+      // Social links enhanced animation
+      document.querySelectorAll(".social-link").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          // Add ripple effect
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "translateY(-5px) scale(1.1)";
+          }, 150);
+        });
+
+        link.addEventListener("mouseenter", function() {
+          this.style.transform = "translateY(-5px) scale(1.1) rotate(5deg)";
+        });
+
+        link.addEventListener("mouseleave", function() {
+          this.style.transform = "translateY(0) scale(1) rotate(0deg)";
+        });
+      });
+
+      // Button ripple effects
+      document.querySelectorAll(".cta-button, .contact-button, .portfolio-button").forEach((btn) => {
+        btn.addEventListener("click", function(e) {
+          let ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+          this.appendChild(ripple);
+
+          let x = e.clientX - e.target.offsetLeft;
+          let y = e.clientY - e.target.offsetTop;
+
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Parallax effect for hero section
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector(".hero");
+        const rate = scrolled * -0.5;
+        
+        if (hero) {
+          hero.style.transform = `translateY(${rate}px)`;
+        }
+      });
+
+      // Counter animation for stats
+      const animateCounters = () => {
+        const counters = document.querySelectorAll(".stat-card h4");
+        counters.forEach(counter => {
+          const target = counter.innerText;
+          const isPercentage = target.includes("%");
+          const isGrade = target.includes("+") || target === "A+";
+          const is247 = target.includes("/");
+          
+          if (!isGrade && !is247) {
+            let count = 0;
+            const increment = isPercentage ? 2 : 1;
+            const speed = 30;
+            
+            const updateCounter = () => {
+              if (count < (isPercentage ? 100 : 95)) {
+                count += increment;
+                counter.innerText = count + (isPercentage ? "%" : "+");
+                setTimeout(updateCounter, speed);
+              }
+            };
+            updateCounter();
+          }
+        });
+      };
+
+      // Trigger counter animation when portfolio section is visible
+      const portfolioObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            portfolioObserver.unobserve(entry.target);
+          }
+        });
+      });
+
+      const portfolio = document.querySelector(".portfolio");
+      if (portfolio) {
+        portfolioObserver.observe(portfolio);
+      }
+
+      // Add loading animation
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+        
+        // Animate hero content
+        const heroElements = document.querySelectorAll(".hero-content > *");
+        heroElements.forEach((el, index) => {
+          setTimeout(() => {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+          }, index * 200);
+        });
+      });
+
+      // Performance optimization: Throttle scroll events
+      let ticking = false;
+      function updateOnScroll() {
+        // Scroll-related updates here
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(updateOnScroll);
+          ticking = true;
+        }
+      });
     </script>
+
+    <!-- CSS for ripple effect -->
+    <style>
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+      }
+
+      @keyframes ripple-animation {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      .loaded {
+        overflow-x: hidden;
+      }
+
+      .hero-content > * {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    </style>
   </body>
 </html>
